@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: awesome-cats-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: awesome-cats-backend
+  template:
+    metadata:
+      labels:
+        app: awesome-cats-backend
+    spec:
+      containers:
+        - name: backend
+          image: gcr.io/intrepid-nova-426815-g6/awesome-cats-backend:v2 #your docker image
+          ports:
+            - containerPort: 3000 
+          env:
+            - name: PGHOST
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: PGHOST
+            - name: PGUSER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: PGUSER
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: PGPASSWORD
+            - name: PGDATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: PGDATABASE
+ 
