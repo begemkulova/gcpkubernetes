@@ -335,9 +335,7 @@ kubectl create secret generic db-secret \
    ```sh
    $ kubectl get pods
    $ kubectl get svc
-   $
-
- kubectl get ingress
+   $ kubectl get ingress
    ```
 
 2. **Access Application**
