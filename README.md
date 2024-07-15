@@ -1,4 +1,8 @@
-# gcpkubernetes by Bekaiym Egemkulova
+# gcpkubernetes by Bekaiym Egemkulova 
+> [!NOTE]
+> #### 👽 the app works perfectly with the HTTPS, yahoo! :>
+> </detalis> 
+
 ## Awesome Cats Deployment - Application Guide
 In the guidance below, you will see my example and my process of deploying this application. 
 All Kubernetes yaml files can be found in the folder "kubernetes-yamls". 
