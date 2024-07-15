@@ -1,0 +1,56 @@
+pipeline {
+    agent any
+    
+    environment {
+        KUBECONFIG = credentials('kubeconfig') // Replace with your Kubernetes credentials ID
+    }
+
+    stages {
+        stage('Build Backend') {
+            steps {
+                script {
+                    // Build backend Docker image (if not already built)
+                    sh 'docker build -t gcr.io/intrepid-nova-426815-g6/awesome-cats-backend:v1 -f awesome_cats_backend/Dockerfile .'
+                }
+            }
+        }
+
+        stage('Deploy Backend') {
+            steps {
+                script {
+                    // Apply backend deployment and service
+                    sh 'kubectl apply -f awesome_cats_backend/backend-deployment.yaml'
+                    sh 'kubectl apply -f awesome_cats_backend/backend-service.yaml'
+                }
+            }
+        }
+
+        stage('Build Frontend') {
+            steps {
+                script {
+                    // Build frontend Docker image (if not already built)
+                    sh 'docker build -t gcr.io/intrepid-nova-426815-g6/awesome-cats-frontend:v1 -f awesome_cats_frontend/Dockerfile .'
+                }
+            }
+        }
+
+        stage('Deploy Frontend') {
+            steps {
+                script {
+                    // Apply frontend deployment and service
+                    sh 'kubectl apply -f awesome_cats_frontend/frontend-deployment.yaml'
+                    sh 'kubectl apply -f awesome_cats_frontend/frontend-service.yaml'
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Deployment successful!'
+        }
+        failure {
+            echo 'Deployment failed!'
+        }
+    }
+}
