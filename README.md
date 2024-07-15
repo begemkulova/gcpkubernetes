@@ -339,7 +339,7 @@ kubectl create secret generic db-secret \
    ```
 
 2. **Access Application**
-   - Navigate to `http://app.bekaiym.biz` and verify your application is accessible.
+   - Navigate to your domain, (in my case, it is `http://app.bekaiym.biz`) and verify your application is accessible.
    - Confirm SSL is working correctly by accessing `https://app.bekaiym.biz`.
 
 ## Troubleshooting
